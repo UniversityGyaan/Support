@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+<title>Admin Dashboard - University Gyaan</title>
+<link rel="icon" href="assets/logo.webp">
+<script>try{var t=localStorage.getItem("ug-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
+<link rel="stylesheet" href="assets/ug.css?v=9">
+</head>
+<body class="admin">
+
+<div id="loginBox" style="display:none">
+  <div class="brand"><img src="assets/logo.webp" width="52" height="52" alt="" onerror="this.style.display='none'"><div><h1>UNIVERSITY GYAAN</h1><small>(by Sanjeev Chauhan)</small></div><button class="themeBtn" title="Light / Dark">🌙</button></div>
+  <h2>Admin Login</h2>
+  <input type="email" id="email" placeholder="Admin email" autocomplete="username">
+  <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+  <button id="loginBtn">Login</button>
+  <div id="loginErr"></div>
+</div>
+
+<div id="app">
+  <div class="sidebar" id="sidebar">
+    <div class="sb-head"><h3><img src="assets/logo.webp" class="mini" alt="" onerror="this.style.display='none'">Support Desk</h3>
+      <div><button class="themeBtn" title="Light / Dark">🌙</button><button id="logoutBtn">Logout</button> <button class="close-btn" id="closeSidebar">✖</button></div>
+    </div>
+    <div id="presWrap">
+      <button id="presBtn"><span id="presTxt">…</span><small>▾</small></button>
+      <div id="presMenu">
+        <button data-p="online">🟢 Online karo</button>
+        <button data-p="offline">🔴 Offline karo (schedule tak)</button>
+        <button data-p="offline_forever">⛔ Offline (jab tak main on na karun)</button>
+        <button data-p="auto">⏱ Auto (timing follow kare)</button>
+        <div class="pt">Auto offline: <select id="offFrom"></select> se <select id="offTo"></select> <button id="presSave">Save</button></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab active" data-tab="open" id="tabOpen">Open</div>
+      <div class="tab" data-tab="hold" id="tabHold">Hold</div>
+      <div class="tab" data-tab="resolved" id="tabResolved">Resolved</div>
+      <div class="tab" data-tab="blocked" id="tabBlocked">🚫</div>
+    </div>
+    <input type="text" id="search" placeholder="Name / Roll / University search...">
+    <div id="list"></div>
+  </div>
+
+  <div class="main">
+    <div class="head">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <h2 id="title">Select a ticket</h2>
+      <span id="statusBadge" style="display:none"></span>
+      <button id="holdBtn" style="display:none">⏸ Hold</button>
+      <button id="resolveBtn" style="display:none">✔ Resolve</button>
+      <button id="blockBtn" title="Student ko permanent block karo">🚫 Block</button>
+    </div>
+    <div id="chat-box"></div>
+    <div id="typing"></div>
+    <div id="placeholder">Left side se koi ticket chuno.</div>
+    <div id="inputSection">
+      <div id="quick">
+        <button class="qr" data-msg="Hello! Main aapki kya madad kar sakta hoon?">Hello</button>
+        <button class="qr" data-msg="Kripya thoda wait karein, main check kar raha hoon.">Wait</button>
+        <button class="qr" data-msg="Aapki problem solve ho gayi hai. Kripya check karein.">Resolved</button>
+      </div>
+      <div id="uploadInfo"></div>
+      <div class="reply-bar" id="replyBar">
+        <div class="rtxt"><b id="replyWho"></b><span id="replyText"></span></div>
+        <button class="rclose" id="replyClose" title="Reply cancel">✕</button>
+      </div>
+      <div id="msgArea">
+        <input type="file" id="fileInput" accept="image/*,application/pdf" style="display:none">
+        <button id="attachBtn" title="Image ya PDF">📎</button>
+        <input type="text" id="msgInput" placeholder="Reply likho..." maxlength="2000">
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>(function(){var d=document.documentElement;function s(){document.querySelectorAll(".themeBtn").forEach(function(b){b.textContent=d.dataset.theme==="dark"?"☀️":"🌙"})}s();document.querySelectorAll(".themeBtn").forEach(function(b){b.onclick=function(){var n=d.dataset.theme==="dark"?"light":"dark";d.dataset.theme=n;try{localStorage.setItem("ug-theme",n)}catch(e){}s()}})})();</script>
+<script>(function(){function f(){var h=(window.visualViewport?window.visualViewport.height:window.innerHeight);document.documentElement.style.setProperty("--app-h",Math.round(h)+"px");window.scrollTo(0,0)}f();window.addEventListener("resize",f);if(window.visualViewport){window.visualViewport.addEventListener("resize",f);window.visualViewport.addEventListener("scroll",f)}})();</script>
+<script type="module" src="assets/admin.js?v=9"></script>
+</body>
+</html>

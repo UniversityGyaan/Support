@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+<title>University Gyaan - Help Desk</title>
+<link rel="icon" href="assets/logo.webp">
+<script>try{var t=localStorage.getItem("ug-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}</script>
+<link rel="stylesheet" href="assets/ug.css?v=9">
+</head>
+<body class="student">
+<div class="container">
+  <div class="brand">
+    <img src="assets/logo.webp" width="62" height="62" alt="University Gyaan" onerror="this.style.display='none'">
+    <div><h1>UNIVERSITY GYAAN</h1><small>(by Sanjeev Chauhan)</small></div>
+    <button id="themeBtn" title="Light / Dark mode">🌙</button>
+  </div>
+  <script>var tb=document.getElementById("themeBtn");tb.textContent=document.documentElement.dataset.theme==="dark"?"☀️":"🌙";tb.onclick=function(){var d=document.documentElement,n=d.dataset.theme==="dark"?"light":"dark";d.dataset.theme=n;try{localStorage.setItem("ug-theme",n)}catch(e){}tb.textContent=n==="dark"?"☀️":"🌙"};</script>
+  <h2>Student Support Panel</h2>
+
+  <div class="card" id="boot">Loading...</div>
+
+  <div class="card" id="authBox" style="display:none">
+    <div class="tabs">
+      <div class="tab active" id="tabLogin">Login</div>
+      <div class="tab" id="tabRegister">Register</div>
+    </div>
+    <input type="text" id="name" placeholder="Full Name" autocomplete="name" style="display:none">
+    <input type="text" id="university" placeholder="University / College ka naam" autocomplete="organization" maxlength="80" style="display:none">
+    <input type="text" id="rollNo" placeholder="Roll Number (e.g. 10101)" autocomplete="username" autocapitalize="off">
+    <input type="password" id="password" placeholder="Password (min 6 characters)" autocomplete="current-password">
+    <input type="password" id="password2" placeholder="Confirm Password" autocomplete="new-password" style="display:none">
+    <input type="text" id="regPin" placeholder="Recovery PIN (6 digit number)" inputmode="numeric" maxlength="6" autocomplete="off" style="display:none">
+    <p class="hint" id="regPinHint" style="display:none">Ye PIN yaad rakhein. Password bhoolne par isi se naya password turant mil jayega.</p>
+    <button id="submitBtn">Login</button>
+    <div id="err"></div>
+    <a href="#" id="forgotLink" class="link">Password bhool gaye?</a>
+  </div>
+
+  <div class="card" id="forgotBox" style="display:none">
+    <h3 class="sub">Password reset</h3>
+    <p class="hint">Roll Number aur apna 6 digit Recovery PIN daalein. Naya password turant yahin mil jayega.</p>
+    <input type="text" id="fRoll" placeholder="Roll Number" autocapitalize="off">
+    <input type="text" id="fPin" placeholder="Recovery PIN (6 digit)" inputmode="numeric" maxlength="6" autocomplete="off">
+    <button id="fInstant">Naya password lo</button>
+    <div id="fMsg"></div>
+    <div class="passbox" id="fResult" style="display:none">
+      ✅ Aapka naya temporary password:
+      <code id="fPass"></code>
+      <button id="fCopy">Copy</button> <button id="fLogin">Ab login karo</button>
+      <div class="hint" style="margin-top:8px">Login ke baad 🔑 se apna password badal lena.</div>
+    </div>
+    <div class="hint" style="margin:14px 0 0">PIN yaad nahi? Agar pehle Telegram jodha tha to:</div>
+    <button id="fTg">📲 Telegram par password lo</button>
+    <div id="fTgMsg"></div>
+    <a href="#" id="fBack" class="link">&larr; Login par wapas</a>
+  </div>
+
+  <div class="card" id="blockedBox" style="display:none">
+    <h3 class="sub">🚫 Aapka account block hai</h3>
+    <p class="hint" id="blockedMsg">Support desk ka misuse hone ki wajah se admin ne aapko block kiya hai.</p>
+    <button id="blockedLogout">Logout</button>
+  </div>
+
+  <div id="appBox">
+    <div class="topbar"><b id="welcome"></b>
+      <div class="tb-actions"><button id="pwBtn" title="Password badlo">🔑</button><button id="logoutBtn">Logout</button></div>
+    </div>
+    <div class="inline-card" id="pwBox" style="display:none">
+      <input type="password" id="pw1" placeholder="Naya password (min 6)" autocomplete="new-password">
+      <input type="password" id="pw2" placeholder="Naya password dobara" autocomplete="new-password">
+      <button id="pwSave">Password badlo</button>
+      <div id="pwMsg"></div>
+      <div class="hint" style="margin-top:12px">Recovery PIN (password bhoolne par instant reset ke liye)</div>
+      <input type="text" id="newPin" placeholder="Naya Recovery PIN (6 digit)" inputmode="numeric" maxlength="6" autocomplete="off">
+      <button id="pinSave">PIN save karo</button>
+      <div id="pinMsg"></div>
+      <div class="hint" style="margin-top:12px">Telegram (password bhoolne par bina admin ke password isi par aayega)</div>
+      <button id="tgLinkBtn">📲 Telegram jodo</button>
+      <div id="tgMsg"></div>
+    </div>
+    <div class="inline-card" id="uniBox" style="display:none">
+      <div class="hint">Apni University / College ka naam daalein (sirf ek baar).</div>
+      <input type="text" id="uniInput" placeholder="University / College ka naam" autocomplete="organization" maxlength="80">
+      <button id="uniSave">Save karo</button>
+      <div id="uniMsg"></div>
+    </div>
+    <div id="presence"></div>
+    <div id="banner"></div>
+    <div id="chat-box"></div>
+    <div id="typing"></div>
+    <div id="uploadInfo"></div>
+    <div class="reply-bar" id="replyBar">
+      <div class="rtxt"><b id="replyWho"></b><span id="replyText"></span></div>
+      <button class="rclose" id="replyClose" title="Reply cancel">✕</button>
+    </div>
+    <div id="msgArea">
+      <input type="file" id="fileInput" accept="image/*,application/pdf" style="display:none">
+      <button id="attachBtn" title="Attach Image or PDF">📎</button>
+      <input type="text" id="msgInput" placeholder="Type message..." maxlength="2000">
+      <button id="sendBtn">Send</button>
+    </div>
+    <button id="unholdBtn">🔓 Chat Unhold Karne Ki Request Bhejo</button>
+    <button id="newQueryBtn">🔄 Start New Query</button>
+  </div>
+</div>
+
+<script type="module" src="assets/student.js?v=9"></script>
+</body>
+</html>
