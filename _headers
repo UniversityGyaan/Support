@@ -1,8 +1,0 @@
-# Versioned files (?v=...) -> browser 1 saal cache karta hai: repeat visit par Netlify se dobara download nahi hota.
-# Kuch badlo to HTML me ?v=9 ko ?v=10 kar dena.
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# HTML hamesha revalidate (304 = lagbhag zero bandwidth) taaki update turant mile
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
